@@ -1,0 +1,12 @@
+# Universal dependencies
+streamlit==1.30.0
+keras==3.3.3
+numpy
+pandas
+matplotlib
+pickle-mixin
+
+# Automatically choose TensorFlow variant based on OS
+tensorflow==2.16.1; platform_system != "Darwin"
+tensorflow-macos==2.16.1; platform_system == "Darwin"
+tensorflow-metal==1.2.0; platform_system == "Darwin"
