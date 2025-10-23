@@ -1,5 +1,5 @@
 # ===============================================
-# SENTIMENT MODEL v2.1 — BiLSTM (Light Version)
+# SENTIMENT MODEL v2.1 — BiLSTM
 # ===============================================
 
 import numpy as np
@@ -14,7 +14,7 @@ from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
 # STEP 1: LOAD PRE-SAVED DATA
 # ==============================
 
-print("📂 Loading saved preprocessed data and embeddings...")
+print("Loading saved preprocessed data and embeddings...")
 
 # Load padded data
 X_train_padded = np.load("X_train_padded.npy")
@@ -27,7 +27,7 @@ y_test         = np.load("y_test.npy")
 # Load embedding matrix
 embedding_matrix = np.load("embedding_matrix.npy")
 
-# Load tokenizer (for future inference)
+# Load tokenizer
 with open("tokenizer_v2.pkl", "rb") as f:
     tokenizer = pickle.load(f)
 
@@ -35,14 +35,14 @@ MAX_LEN = X_train_padded.shape[1]
 vocab_size = embedding_matrix.shape[0]
 embedding_dim = embedding_matrix.shape[1]
 
-print(f"✅ Loaded successfully: X_train {X_train_padded.shape}, embedding {embedding_matrix.shape}")
+print(f"Loaded successfully: X_train {X_train_padded.shape}, embedding {embedding_matrix.shape}")
 
 
 # ==============================
 # STEP 2: BUILD BiLSTM MODEL
 # ==============================
 
-print("\n🧱 Building the 2-layer BiLSTM model ...")
+print("Building the 2-layer BiLSTM model ...")
 
 model = Sequential([
     Embedding(
@@ -52,7 +52,7 @@ model = Sequential([
         input_length=MAX_LEN,
         trainable=False
     ),
-    Bidirectional(LSTM(128, return_sequences=True)),   # 🔄 from both directions
+    Bidirectional(LSTM(128, return_sequences=True)),   # from both directions
     Dropout(0.5),
     Bidirectional(LSTM(64)),
     Dropout(0.5),
@@ -87,7 +87,7 @@ early_stop = EarlyStopping(
     verbose=1
 )
 
-print("\n🚀 Starting BiLSTM training ...\n")
+print("Starting BiLSTM training ...\n")
 history = model.fit(
     X_train_padded, y_train,
     validation_data=(X_val_padded, y_val),
@@ -98,10 +98,10 @@ history = model.fit(
 )
 
 val_loss, val_acc = model.evaluate(X_val_padded, y_val, verbose=1)
-print(f"\n✅ Validation Accuracy: {val_acc:.4f} | Validation Loss: {val_loss:.4f}")
+print(f"Validation Accuracy: {val_acc:.4f} | Validation Loss: {val_loss:.4f}")
 
 model.save("sentiment_model_v2.1_BiLSTM_final.h5")
-print("💾 Final trained model saved as sentiment_model_v2.1_BiLSTM_final.h5")
+print("Final trained model saved as sentiment_model_v2.1_BiLSTM_final.h5")
 
 
 # ==============================
@@ -116,4 +116,4 @@ plt.ylabel("Accuracy")
 plt.legend()
 plt.show()
 
-print("\n🎉 All training artifacts saved successfully!")
+print("All training artifacts saved successfully!")
