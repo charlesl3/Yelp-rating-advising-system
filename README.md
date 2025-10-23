@@ -5,7 +5,7 @@ It includes preprocessing scripts, tokenizer creation, GloVe embeddings, model t
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 .
@@ -21,7 +21,7 @@ It includes preprocessing scripts, tokenizer creation, GloVe embeddings, model t
 
 ---
 
-## 🚀 How to Run
+## How to Run
 
 ### 1. Create environment
 ```bash
@@ -48,14 +48,14 @@ python deployment.py
 
 ---
 
-## 🧠 Notes
+## Notes
 - The dataset used is `yelp_academic_dataset_review.json` from Yelp Open Dataset.
 - Pretrained word vectors: `glove.6B.100d.txt` (GloVe 100-dimensional version).
 - The model outputs predicted sentiment scores from 1 to 5 stars.
 
 ---
 
-## 📦 Requirements
+## Requirements
 
 Key packages:
 - TensorFlow / Keras
@@ -65,5 +65,5 @@ Key packages:
 
 ---
 
-## 📜 Author
+## Author
 **Charles Liu**
